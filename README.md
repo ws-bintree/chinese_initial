@@ -7,7 +7,7 @@
 
 
 ```
-composer require bingchao/chineseInitial
+composer require bingchao/chinese-initial
 ```
 或者
 ```
