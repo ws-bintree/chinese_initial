@@ -16,10 +16,15 @@ require '../src/chineseInitial.php';
 
 ##使用(use)
 
+需求转换的二维数组键名为name:
 ```$xslt
 $new_arr = (new chineseInitial\getInitial)->groupByInitials($arr);
 ```
-
+需求转换的二维数组键名为other:
+```$xslt
+$new_arr = (new chineseInitial\getInitial)->groupByInitials($arr,'other');
+```
+效果:
 ```$xslt
 $arr =[
 	['name'=>'小龙虾','num'=>44],
