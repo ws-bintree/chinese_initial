@@ -14,15 +14,15 @@ class getInitial
 	 * @param string $targetKey 首字母的键名
 	 * @return array    根据首字母关联的二维数组
 	 */
-	public function groupByInitials(array $data, string $targetKey = 'name'): array
+	public static function groupByInitials(array $data, string $targetKey = 'name'): array
     {
-		$Pinyin = $this->getPinyinList();
+		$Pinyin = self::getPinyinList();
 		$data = array_map(function ($item) use ($targetKey,$Pinyin) {
 			return array_merge($item, [
-				'initials' => $this->getInitials($item[$targetKey],$Pinyin),
+				'initials' => self::getInitials($item[$targetKey],$Pinyin),
 			]);
 		}, $data);
-        return $this->sortInitials($data);
+        return self::sortInitials($data);
 	}
 
 	/**
@@ -30,7 +30,7 @@ class getInitial
 	 * @param array $data
 	 * @return array
 	 */
-	public function sortInitials(array $data): array
+	public static function sortInitials(array $data): array
     {
 		$sortData = [];
 		foreach ($data as $value) {
@@ -45,13 +45,13 @@ class getInitial
      * @param string $str 汉字字符串
      * @return string 首字母
      */
-    public function getInitial(string $str): string
+    public static function getInitial(string $str): string
     {
         $str = trim($str);
         $first_str= mb_convert_encoding($str,"UTF-8","GB2312");//转码
         $fChar = ord($first_str[0]);
         if ($fChar >= ord("A") and $fChar <= ord("z")) return strtoupper($first_str[0]);//英文首字母快键处理
-        $str = $this->unicode_encode($str);
+        $str = self::unicode_encode($str);
         return strtoupper($str[0]);
     }
 
@@ -60,9 +60,9 @@ class getInitial
 	 * @param string $str 汉字字符串
 	 * @return string 首字母
 	 */
-	public function getInitials(string $str, $Pinyin): string
+	public static function getInitials(string $str, $Pinyin): string
     {
-        $str = $this->getInitial($str);
+        $str = self::getInitial($str);
 		if(isset($Pinyin[$str])){
 			return $Pinyin[$str];
 		}else{
@@ -74,7 +74,7 @@ class getInitial
 	 * 获取拼音数组(可存缓存)
 	 * @return array 汉字数组
 	 */
-	public function getPinyinList(): array
+	public static function getPinyinList(): array
     {
         $Pinyin = [];
 		$fp = fopen(dirname(__FILE__).'/pinyin.txt','r');
@@ -94,7 +94,7 @@ class getInitial
 	 * @param string $str 字符串
      * @return array 汉字数组
 	 */
-	private function unicode_encode(string $str): array
+	private static function unicode_encode(string $str): array
     {
         $str = iconv('UTF-8', 'UCS-2', $str);
 		$arrStr = str_split($str, 2);
