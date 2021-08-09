@@ -49,8 +49,8 @@ class getInitial
     {
         $str = trim($str);
         $first_str= mb_convert_encoding($str,"UTF-8","GB2312");//转码
-        $fchar = ord($first_str{0});
-        if ($fchar >= ord("A") and $fchar <= ord("z")) return strtoupper($first_str{0});//英文首字母快键处理
+        $fchar = ord($first_str[0]);
+        if ($fchar >= ord("A") and $fchar <= ord("z")) return strtoupper($first_str[0]);//英文首字母快键处理
         $str = self::unicode_encode($str);
         $str = strtoupper($str[0]);
         if(isset($pinyins[$str])){
