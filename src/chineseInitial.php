@@ -45,30 +45,20 @@ class getInitial
      * @param string $str 汉字字符串
      * @return string 首字母
      */
-    public static function getInitial(string $str): string
+    public static function getInitials($str,$pinyins)
     {
         $str = trim($str);
         $first_str= mb_convert_encoding($str,"UTF-8","GB2312");//转码
-        $fChar = ord($first_str[0]);
-        if ($fChar >= ord("A") and $fChar <= ord("z")) return strtoupper($first_str[0]);//英文首字母快键处理
+        $fchar = ord($first_str{0});
+        if ($fchar >= ord("A") and $fchar <= ord("z")) return strtoupper($first_str{0});//英文首字母快键处理
         $str = self::unicode_encode($str);
-        return strtoupper($str[0]);
+        $str = strtoupper($str[0]);
+        if(isset($pinyins[$str])){
+            return $pinyins[$str];
+        }else{
+            return '#';
+        }
     }
-
-	/**
-	 * 批量获取首字母
-	 * @param string $str 汉字字符串
-	 * @return string 首字母
-	 */
-	public static function getInitials(string $str, $Pinyin): string
-    {
-        $str = self::getInitial($str);
-		if(isset($Pinyin[$str])){
-			return $Pinyin[$str];
-		}else{
-			return '#';
-		}
-	}
 
 	/**
 	 * 获取拼音数组(可存缓存)
