@@ -16,5 +16,3 @@ $arr =[
 ];
 $new_arr = (new chineseInitial\getInitial)->groupByInitials($arr);
 print_r($new_arr);
-$new_arr = (new chineseInitial\getInitial)->getInitial('ww');
-print_r($new_arr);

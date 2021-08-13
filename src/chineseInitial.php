@@ -86,7 +86,7 @@ class getInitial
 	 */
 	private static function unicode_encode(string $str): array
     {
-        $str = iconv('UTF-8', 'UCS-2BE', $str);
+        $str = iconv('UTF-8', 'UCS-2BE//IGNORE', $str);
 		$arrStr = str_split($str, 2);
 		$unicodeStr = [];
 		for($i = 0, $len = count($arrStr); $i < $len; $i++) {
